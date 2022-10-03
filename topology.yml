@@ -1,4 +1,4 @@
-name: TAQI-Scenario
+name: taqiscenario
 
 hosts:
   - name: server
