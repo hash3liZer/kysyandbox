@@ -1,0 +1,50 @@
+---
+# This is a role for setting up the server.
+
+- name: Add user and set password
+  user:
+    name: '{{ username }}'
+    password: '{{ password | password_hash(''sha512'') }}'
+    shell: '/bin/bash'
+
+- name: Install packages
+  apt:
+    pkg:
+     - telnetd
+    update_cache: yes
+
+- name: Change Telnet port
+  replace:
+    path: /etc/services
+    regexp: '23/tcp'
+    replace: '{{ telnet_port }}/tcp'
+
+# xinetd must be installed after changing the Telnet port
+- name: Install xinetd package
+  apt:
+    name: xinetd
+
+- name: Create privilege escalation vulnerability
+  lineinfile:
+    path: /etc/sudoers
+    line: '{{ username }} ALL=(ALL) /usr/bin/less /home/{{ username }}/flag.txt'
+
+- name: Place flag
+  copy:
+    dest: '/home/{{ username }}/flag.txt'
+    owner: '{{ username }}'
+    content: '{{ flag }}'
+    mode: '0600'
+
+- name: Place second flag
+  copy:
+    dest: '/root/flag.txt'
+    owner: root
+    content: '{{ flag_2 }}'
+    mode: '0600'
+
+- name: Create alias for client
+  lineinfile:
+    path: '/etc/hosts'
+    line: '192.168.30.5 client'
+...

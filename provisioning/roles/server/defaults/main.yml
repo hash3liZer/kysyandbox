@@ -1,0 +1,5 @@
+username: alice
+password: bacon
+telnet_port: 2323
+flag: "Top_Secret_Flag\n"
+flag_2: "Cant_Guess_This\n"
