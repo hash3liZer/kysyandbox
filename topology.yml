@@ -1,4 +1,4 @@
-name: kypo-crp-demo-training
+name: First Custom Scenario
 
 hosts:
   - name: server
@@ -11,6 +11,12 @@ hosts:
     base_box: 
       image: ubuntu-focal-x86_64
       man_user: ubuntu
+    flavor: standard.small
+    
+  - name: extraclient
+    base_box:
+      image: debian-9-x86_64
+      man_user: debian
     flavor: standard.small
 
 routers:
@@ -35,6 +41,9 @@ net_mappings:
     - host: client
       network: client-switch
       ip: 192.168.30.5
+    - host: extraclient
+      network: client-switch
+      ip: 102.168.30.6
 
 router_mappings:
     - router: router
