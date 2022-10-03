@@ -1,4 +1,4 @@
-name: First Custom Scenario
+name: TAQI-Scenario
 
 hosts:
   - name: server
