@@ -15,8 +15,8 @@ hosts:
     
   - name: extraclient
     base_box:
-      image: debian-9-x86_64
-      man_user: debian
+      image: ubuntu-focal-x86_64
+      man_user: ubuntu
     flavor: standard.small
 
 routers:
